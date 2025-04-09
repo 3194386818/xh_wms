@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="f2de60b1-f251-4bc2-9fdc-8a67faef1dee" name="wms项目 Mapping">
+      <data-sources db="ed2be7d6-bedc-45b7-8a04-594dd1625674" ddl="1e4395c2-ade5-42a9-bfe2-04e4df32923d" />
+    </mapping>
+  </component>
+</project>

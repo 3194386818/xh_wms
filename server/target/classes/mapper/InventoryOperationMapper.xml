@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaohei.wms.server.dao.InventoryOperationMapper">
+
+    <!-- 插入操作记录 -->
+    <insert id="insertInventoryOperation" parameterType="com.xiaohei.wms.server.entity.InventoryOperation">
+        /* 记录所有库存操作 */
+        INSERT INTO inventory_operation(sn, mac, uid, product_type_id,
+                                        operation_type, operation_time, operation_uid)
+        VALUES (#{sn},
+                #{mac},
+                #{uid},
+                #{productTypeId},
+                #{operationType},
+                #{operationTime},
+                #{operatorUid})
+    </insert>
+
+    <!-- 查询操作记录 -->
+    <select id="selectOperation" parameterType="com.xiaohei.wms.server.dto.InventoryQueryDTO"
+            resultType="com.xiaohei.wms.server.entity.InventoryOperation">
+        /* 多条件查询操作记录 */
+        SELECT
+        id,
+        sn,
+        mac,
+        uid,
+        product_type_id as productTypeId,
+        operation_type as operationType,
+        operation_time as operationTime,
+        operation_uid as operatorUid,
+        pt.name as productTypeName
+        FROM inventory_operation io
+        LEFT JOIN product_type pt ON io.product_type_id = pt.id
+        <where>
+            <if test="sn != null and sn != ''">
+                AND io.sn = #{sn}
+            </if>
+            <if test="mac != null and mac != ''">
+                AND io.mac = #{mac}
+            </if>
+            <if test="uid != null and uid != ''">
+                AND io.uid = #{uid}
+            </if>
+            <if test="productTypeId != null">
+                AND io.product_type_id = #{productTypeId}
+            </if>
+            <if test="operationType != null">
+                AND io.operation_type = #{operationType}
+            </if>
+            <if test="startTime != null">
+                AND io.operation_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND io.operation_time &lt;= #{endTime}
+            </if>
+        </where>
+        <!-- 排序处理 -->
+        <choose>
+            <when test="sortField == 'operationTime' and sortOrder == 'asc'">
+                ORDER BY io.operation_time ASC
+            </when>
+            <when test="sortField == 'operationTime' and sortOrder == 'desc'">
+                ORDER BY io.operation_time DESC
+            </when>
+            <otherwise>
+                ORDER BY io.operation_time DESC <!-- 默认按时间降序 -->
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

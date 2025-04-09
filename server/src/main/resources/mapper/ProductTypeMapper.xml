@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaohei.wms.server.dao.ProductTypeMapper">
+
+    <!-- 根据名称查询产品类型 -->
+    <select id="findByName" parameterType="string" resultType="com.xiaohei.wms.server.entity.ProductType">
+        /* 通过产品类型名称查询 */
+        SELECT id, name
+        FROM product_type
+        WHERE name = #{name}
+    </select>
+
+    <!-- 新增产品类型 (用于后续扩展) -->
+    <insert id="insert" parameterType="com.xiaohei.wms.server.entity.ProductType" useGeneratedKeys="true"
+            keyProperty="id">
+        /* 插入新产品类型 */
+        INSERT INTO product_type(name)
+        VALUES (#{name})
+    </insert>
+</mapper>

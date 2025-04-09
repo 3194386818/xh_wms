@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaohei.wms.server.dao.UserMapper">
+    <!-- 根据用户名查询用户 -->
+    <select id="selectByUsername" parameterType="string" resultType="com.xiaohei.wms.server.entity.User">
+        SELECT uid,
+               username,
+               passwd,
+               name,
+               img_base64  as imgBase64,
+               create_time as createTime,
+               update_time as updateTime
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <!-- 根据UID查询用户 -->
+    <select id="selectByUid" parameterType="string" resultType="com.xiaohei.wms.server.entity.User">
+        SELECT uid,
+               username,
+               passwd,
+               name,
+               img_base64  as imgBase64,
+               create_time as createTime,
+               update_time as updateTime
+        FROM user
+        WHERE uid = #{uid}
+    </select>
+
+    <!-- 新增用户 -->
+    <insert id="insertUser" parameterType="com.xiaohei.wms.server.entity.User">
+        INSERT INTO user(uid, username, passwd, name, img_base64)
+        VALUES (#{uid}, #{username}, #{passwd}, #{name}, #{imgBase64})
+    </insert>
+
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="com.xiaohei.wms.server.entity.User">
+        UPDATE user
+        SET
+        username = #{username},
+        <if test="passwd != null and passwd != ''">
+            passwd = #{passwd},
+        </if>
+        name = #{name},
+        img_base64 = #{imgBase64}
+        WHERE uid = #{uid}
+    </update>
+</mapper>
