@@ -8,7 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface InventoryMapper {
+
     void insertOrUpdateInventory(Inventory inventory);
+
     Inventory selectBySn(String sn);
+
     List<Inventory> selectByCondition(InventoryQueryDTO query);
 }

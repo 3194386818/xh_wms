@@ -4,6 +4,10 @@ spring:
     username: root
     password: qq09128418..
     driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    user:
+      name: root
+      password: 123
 
 mybatis:
   type-aliases-package: com.xiaohei.wms.server.dao

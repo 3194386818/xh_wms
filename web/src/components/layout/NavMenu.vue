@@ -49,6 +49,7 @@
       </template>
       <el-menu-item index="/order/inbound">入库单</el-menu-item>
       <el-menu-item index="/order/outbound">出库单</el-menu-item>
+      <el-menu-item index="/order/track">跟踪订单</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
