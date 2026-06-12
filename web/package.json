@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.17.0",
     "core-js": "^3.8.3",
     "element-plus": "^2.4.4",
     "vue": "^3.2.13",
@@ -46,4 +46,4 @@
       "vue/multi-word-component-names": "off"
     }
   }
-} 
+}
